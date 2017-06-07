@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BackingApp</string>
+    <string name="stepslabel">Steps</string>
+    <string name="previousvideo">Previous</string>
+    <string name="nextvideo">Next</string>
+    <string name="viewingridients">View Ingredients</string>
+</resources>
