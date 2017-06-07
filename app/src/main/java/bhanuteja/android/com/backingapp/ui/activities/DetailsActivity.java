@@ -31,12 +31,14 @@ public class DetailsActivity extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .replace(R.id.details_frame,videoFragment)
                     .commit();
-        }else {
+        }else if(savedInstanceState==null){
             IngredientsFragement ingredientsFragement = new IngredientsFragement();
             ingredientsFragement.setList(ingredientsModelList);
             fragmentManager.beginTransaction()
                     .replace(R.id.details_frame,ingredientsFragement)
                     .commit();
+        }else {
+            fragmentManager.findFragmentById(R.id.details_frame);
         }
 
     }
