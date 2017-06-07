@@ -93,7 +93,10 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener{
             initializePlayer(Uri.parse(list.get(pos).getVideoURL()));
 
             description.setText(list.get(pos).getDescription());
-            if (list.get(pos).getThumbnailURL() == ""){
+            if (list.get(pos).getThumbnailURL().equals("")){
+                Glide.with(getContext()).load(list.get(pos).getThumbnailURL()).placeholder(R.drawable.image_placeholder)
+                        .error(R.drawable.image_not_available).into(thumbnail);
+            }else {
                 Glide.with(getContext()).load(list.get(pos).getThumbnailURL()).placeholder(R.drawable.image_placeholder)
                         .error(R.drawable.image_not_available).into(thumbnail);
             }
@@ -200,6 +203,23 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener{
     @Override
     public void onResume() {
         super.onResume();
+    }
+    @Override
+    public void onPause(){
+        super.onPause();
+        releasePlayer();
+        if (mediaSession != null) {
+            mediaSession.setActive(false);
+        }
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        releasePlayer();
+        if (mediaSession != null) {
+            mediaSession.setActive(false);
+        }
     }
 
     @Override
